@@ -66,7 +66,12 @@ app.get('/GetCandidatejobs',function(req,res){
 app.get('/GetJobData',function(req,res){
     res.sendFile(path.join(__dirname+'/views/pages/GetJobData.html'))
 })
-
+app.get('/GetCandidateJobsData',function(req,res){
+    res.sendFile(path.join(__dirname+'/views/pages/GetCandidateJobsData.html'))
+})
+app.get('/ViewEnquiries',function(req,res){
+    res.sendFile(path.join(__dirname+'/views/pages/ViewEnquiries.html'))
+})
 var Users = require('./views/pages/Users');
 {
 app.use('/users',Users);

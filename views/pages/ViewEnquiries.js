@@ -40,8 +40,9 @@ var storage = multer.diskStorage({
                 }
                 else{
                     console.log(data)
-                    appData['data']=data[3].name;
-                    res.render('./ViewEnquiries.ejs',appData)
+                    appData['data']=data;
+                    res.send(data)
+                 // res.status(201).json(appData)
                     //res.status(201).json(appData)
                 }
             })

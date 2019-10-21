@@ -12,6 +12,7 @@ var http=require('http');
 var jwt=require('jsonwebtoken')
 users.use(express.static('./Routes'));
 process.env.secretkey='zyclyx';
+const jwtExpirySeconds=500;
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null,'./uploads/Images')
@@ -31,6 +32,7 @@ var storage = multer.diskStorage({
     
       var username=req.body.username;
       var password=req.body.password;
+      
     
       console.log(username,password+' auth ddetails are')
       database.connection.getConnection(function(err,connection){
@@ -42,13 +44,13 @@ var storage = multer.diskStorage({
               }
               else{
                 if(data.length>0){
-                console.log('data retrieved'+data[0]);
+                console.log('data retrieved'+data[0].password);
               console.log(bcrypt.compareSync(password,data[0].password));
               if(bcrypt.compareSync(password,data[0].password)){
-               let token=jwt.sign(data[0],process.env.secretkey,{
+           let token= jwt.sign(data[0].password,process.env.secretkey,{
                
-                   expiresIn:1440
-                   
+              
+            
                })
              
                appData['data']=token;
@@ -56,7 +58,7 @@ var storage = multer.diskStorage({
                 appData['data']=username;
                 appData['data']='authentication done'
                
-               console.log(token, username)
+               console.log(username)
                console.log('authentication done')
                console.log(data[0].status)
                if(data[0].status=='new'){
@@ -75,8 +77,8 @@ var storage = multer.diskStorage({
               }
             
               else{
-
-
+                
+                res.cookie('token', token, { maxAge: jwtExpirySeconds * 1000 })
                 res.redirect('/AdminHome')
                             
                               }
@@ -107,14 +109,15 @@ var storage = multer.diskStorage({
   })
 
   function verifyToken(req,res,next){
-      var token=req.body.token || req.headers['token'];
+     // var token=req.body.token || req.headers['token'];
+     var token=req.headers.cookie;
       console.log(token+' token')
       if(token){
         
       jwt.verify(token,process.env.secretkey,function(err){
           if(err){
               appData['data']='invalid token';
-              res.status(201).json(appData);
+              res.status(200).json(appData);
           }
           else{
             next();
@@ -131,7 +134,7 @@ var storage = multer.diskStorage({
       }
   }
 
-  users.post('/data',upload.single(''),verifyToken,function(req,res){
+  users.post('/data',upload.single(''),function(req,res){
       //var token=req.body.token|| req.header['token'];
 console.log('Token verified');
 res.send('Token verified');

@@ -8,19 +8,35 @@
 </head>
 <body>
     <div id="user">
+        <h1>Available Jobs</h1>
         <script>
 
             function getjobdata(){
-                fetch('http://192.168.1.56:3000/GetCandidateJobs/GetCandidateJobs')
-                .then(Response=>Response.json())
-                .then(json=>{
-                    return json.map(user=>{
+                const store=localStorage.getItem("textvalue")
+                console.log(store);
+                
+        const formData=new FormData();
+        //formData.append('title',myselect);
+        formData.append('job',store)
+       
+    
+        fetch('http://localhost:3000/SearchJob/SearchJob',{
+            method:'post',
+            body:formData
+        }).then(function(response){
+            return response.json();
+        }).then(json=>{
+              return json.map(user=>{
                   let html=document.getElementById('user');
-                  html.innerHTML+=`<h1>${user.id}</h1>`
-                })
-            })
+                  html.innerHTML +=`
+                    <h6>${user.jid}</h6>
+                   `
+                  
+              })
 
-            }
+            
+        })
+    }
             getjobdata();
             </script>
     </div>
