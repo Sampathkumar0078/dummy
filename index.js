@@ -40,7 +40,7 @@ app.get('/Enquiries',function(req,res){
     res.sendfile(path.join(__dirname+'/views/pages/Enquiries.html'))//Enquiries
 })
 app.get('/ForgotPassword', function(req,res){
-    res.sendFile(path.join(__dirname+'/views/pages/views/pages/ForgotPassword.html'))//Forgot password
+    res.sendFile(path.join(__dirname+'/views/pages/ForgotPassword.html'))//Forgot password
 })
 app.get('/ForgotPasswordSet',function(req,res){
     res.sendFile(path.join(__dirname+'/views/pages/ForgotPasswordSet.html'))//ForgotPasswordSet
