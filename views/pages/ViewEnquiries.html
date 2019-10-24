@@ -36,7 +36,7 @@
 
 
       function submit(){
-          fetch('http://localhost:3000/ViewEnquiries/ViewEnquiries')
+          fetch('http://192.168.1.56:3000/ViewEnquiries/ViewEnquiries')
           .then(Response=>Response.json())
           .then(json=>{
               return json.map(user=>{
@@ -57,6 +57,7 @@
      
     
   </script>
+  <a href="AdminHome.html"><u>admin home</u></a>
 
 </body>
 </html>

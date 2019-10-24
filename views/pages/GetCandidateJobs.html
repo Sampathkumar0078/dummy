@@ -19,13 +19,14 @@
 <input type="submit" name="submit" value="submit" id='mybtn'>
 </form>
 
-</div>
+
+
   <script>
       
 
 
       function submit(){
-          fetch('http://localhost:3000/ActivePositions/ActivePositions')
+          fetch('http://192.168.1.56:3000/ActivePositions/ActivePositions')
           .then(Response=>Response.json())
           .then(json=>{
               return json.map(user=>{
@@ -45,13 +46,15 @@
          console.log(title);
          //console.log("hello");
          localStorage.setItem("textvalue1",title);
-         window.location="http://localhost:3000/GetCandidateJobsData";
+
+         window.location="http://192.168.1.56:3000/GetCandidateJobsData";
 
 
 
       })
     
   </script>
+  </div>
 
 </body>
 </html>

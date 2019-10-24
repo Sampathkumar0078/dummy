@@ -30,11 +30,11 @@ var storage = multer.diskStorage({
       console.log(name,email,mobile,message+'  details are')
       database.connection.getConnection(function(err,connection){
           if(err){
-              console.log(err)
+              console.log(err+' error')
               res.send('Problem while connecting to database');
           }
           else{
-              connection.query('insert into enquiries values(?,?,?,?)',[name,email,mobile,message,subject],function(err,data){
+              connection.query('insert into enquiries values(?,?,?,?,?)',[name,email,mobile,message,subject],function(err,data){
                   if(err){
                       console.log(err)
                       res.send('Problem in database');

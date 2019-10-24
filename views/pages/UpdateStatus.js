@@ -22,15 +22,15 @@ var storage = multer.diskStorage({
   var upload = multer({ storage: storage })
 
   users.post('/UpdateStatus',upload.single(''),function(req,res){
-     var status= req.body.status;
-     console.log(status+' in js');
+     var title= req.body.title;
+  console.log(title+' title')
      database.connection.getConnection(function(err,connection){
          if(err){
              console.log(err);
              res.send('error occured while connecting database');
          }
          else{
-             connection.query('update jobs set status=? where status=?',['close','active'],function(err,data){
+             connection.query('update jobs set status=? where jobtitle=?',['close',title],function(err,data){
                  if(err){
                      console.log(err)
                      res.send('problem in database');

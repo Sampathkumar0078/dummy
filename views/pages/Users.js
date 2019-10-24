@@ -7,6 +7,7 @@ var database=require('../pages/Database/DBConnections');
 var multer=require('multer');
 var fs=require('fs');
 var http=require('http');
+var alert=require('alert-node');
 users.use('/uploads',express.static('uploads'))
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -89,10 +90,12 @@ users.post('/Register',upload.single('file'),function(req,res){
                     connection.query('insert into register values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',[name,mail,phonenumber,gender,country,qualification,expertise,experience,position,currentcompany,currentctc,expectedctc,noticeperiod,currentlocation,file,additionalinformation],function(err,data){
                         if(err){
                             console.log(err);
+                            alert('values not inserted')
                         }
                         else{
                             console.log('values inserted')
                             appData['data']='values inserted'
+                         //   alert('values inserted')
                             res.status(201).json(appData);
                         }
                     })

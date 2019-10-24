@@ -72,6 +72,9 @@ app.get('/GetCandidateJobsData',function(req,res){
 app.get('/ViewEnquiries',function(req,res){
     res.sendFile(path.join(__dirname+'/views/pages/ViewEnquiries.html'))
 })
+app.use('/BackToHome',function(req,res){
+    res.sendFile(path.join(__dirname+'/views/pages/BackToHome.html'))
+})
 var Users = require('./views/pages/Users');
 {
 app.use('/users',Users);

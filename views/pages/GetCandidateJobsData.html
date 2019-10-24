@@ -8,21 +8,27 @@
     <title>Document</title>
 </head>
 <body>
-    <div  >
+
+    <h1>hello</h1>
+
+    <div >
      
 
-      <table class="table table-striped">
+      <table class="table">
         <thead>
             <tr>
           <th>ID</th>
           <th>JID</th>
           <th>DESIGNATION</th>
           <th>DEPARTMENT</th>
+          <th>Close job</th>
         </tr>
         </thead>
+        <tbody>
           <tr id="user">
-             
+         
           </tr>
+        </tbody>
       </table>
 
   
@@ -31,14 +37,14 @@
         function getjobdata1(){
             const store=localStorage.getItem("textvalue1")
             console.log(store);
-            //console.log("hello");
+            console.log("hello");
             
     const formData=new FormData();
     //formData.append('title',myselect);
     formData.append('title',store)
    
 
-    fetch('http://localhost:3000/GetCandidateJobs/GetCandidateJobs',{
+    fetch('http://192.168.1.56:3000/GetCandidateJobs/GetCandidateJobs',{
         method:'post',
         body:formData
     }).then(function(response){
@@ -50,16 +56,22 @@
               <td>${user.jid}</td>
               <td>${user.designation}</td>
               <td>${user.depatment}</td>
-
+              <td>
+<form action="/UpdateStatus/UpdateStatus" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="title" value=${store}>
+<input type="submit" value="submit">
+</td>
                `
-              
-              
-          })
-
-        
+     
+            })
     })
 }
 getjobdata1();
 </script>
+<table>
+   
+</table>
+</form>
+<a href="AdminHome.html"><u>admin home</u></a>
 </body>
 </html>

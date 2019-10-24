@@ -25,6 +25,7 @@ var storage = multer.diskStorage({
 
   users.post('/Searchjob',upload.single(''),function(req,res){
       var job=req.body.job;
+      console.log(job+' job')
       database.connection.getConnection(function(err,connection){
           if(err){
               console.log(err)

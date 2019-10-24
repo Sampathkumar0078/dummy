@@ -5,6 +5,7 @@ var database=require('../pages/Database/DBConnections');
 var multer=require('multer');
 process.env.secretkey='zyclyx';
 users.set('ViewEngine','ejs')
+var alert=require('alert-node');
 
 
 var storage = multer.diskStorage({
@@ -41,6 +42,7 @@ var storage = multer.diskStorage({
                 else{
                     console.log(data)
                     appData['data']=data;
+                    
                     res.send(data)
                  // res.status(201).json(appData)
                     //res.status(201).json(appData)

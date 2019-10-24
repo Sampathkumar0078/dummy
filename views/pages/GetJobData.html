@@ -7,20 +7,32 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="user">
-        <h1>Available Jobs</h1>
+    <div >
+            <table class="table">
+                    <thead>
+                        <tr>
+                      <th>Jobid</th>
+                      <th>JobTitle</th>
+                      
+                    </tr>
+                    </thead>
+                    <tbody id="user">
+                      
+                    </tbody>
+                  </table>
+   
         <script>
 
             function getjobdata(){
                 const store=localStorage.getItem("textvalue")
-                console.log(store);
+                console.log(store +"store value");
                 
         const formData=new FormData();
         //formData.append('title',myselect);
         formData.append('job',store)
        
     
-        fetch('http://localhost:3000/SearchJob/SearchJob',{
+        fetch('http://192.168.1.56:3000/SearchJob/SearchJob',{
             method:'post',
             body:formData
         }).then(function(response){
@@ -28,8 +40,9 @@
         }).then(json=>{
               return json.map(user=>{
                   let html=document.getElementById('user');
-                  html.innerHTML +=`
-                    <h6>${user.jid}</h6>
+                  html.innerHTML +=`<tr><td>${user.jid}</td>
+                  <td>${user.jobtitle}</td><tr>
+                   
                    `
                   
               })
