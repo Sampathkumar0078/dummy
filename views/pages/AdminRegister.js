@@ -76,6 +76,8 @@ users.post('/AdminRegister',upload.single(''),function(req,res){
 }
 else{
     console.log('Password and confirm pasword not matching');
+    appData['data']='Password and confirm pasword not matching';
+  res.status(201).json(appData)
 }
 })
 module.exports=users;
